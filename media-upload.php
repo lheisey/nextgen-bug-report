@@ -121,9 +121,11 @@ function media_upload_nextgen_form($errors) {
 		$start = 0;
 
 	// Get the images
-	if ( $galleryID != 0 )
-		$picarray = $wpdb->get_col("SELECT pid FROM $wpdb->nggpictures WHERE galleryid = '$galleryID' AND exclude != 1 ORDER BY {$ngg->options['galSort']} {$ngg->options['galSortDir']} LIMIT $start, 10 ");	
-
+	if ( $galleryID != 0 ){
+		$picarray = $wpdb->get_col("SELECT pid FROM $wpdb->nggpictures WHERE galleryid = '$galleryID' AND exclude != 1 ORDER BY {$ngg->options['galSort']} {$ngg->options['galSortDir']} ");
+		$picarray = array_slice($picarray, $start, 10 );
+	}
+	
 	// WP-Core code for Post-thumbnail
 	$calling_post_id = 0;
 	if ( isset( $_GET['post_id'] ) )
