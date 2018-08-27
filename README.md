@@ -15,6 +15,8 @@ Note: The versions are when the bug report was submitted to NextGen. Everything 
 1. Select Add Media button, select NextGEN Gallery link, select the gallery which was created
 1. In the picture page 1 is at the top and page 2 below. Note the images which are on pages 1 and 2: some images are listed twice and some not at all
 
+![screenshots of bug](NextGEN-both-pages.png)
+
 ## What and where the problem is ##
 I tracked the problem down to this file: wp-content/plugins/NextGEN-galley/products/photocrati_NextGEN/modules/ngglegacy/media-upload.php and line 125:
 ```
