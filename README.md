@@ -42,11 +42,11 @@ This matches picture selection I see on pages 1 and 2.
 ## My implementation of a fix ##
 For my impletation of a fix I read all of the gallery into an array then select the portion of the array needed for each page. While not ideal particularly for large galleries it does fix the problem.
 ```
-$picarray = $wpdb->get_col("SELECT pid FROM $wpdb->nggpictures WHERE galleryid = '$galleryID' AND exclude != 1 ORDER BY {$ngg->options['galSort']} {$ngg->options['galSortDir']} LIMIT $start, 10 ");
+	if ( $galleryID != 0 ){
+		$picarray = $wpdb->get_col("SELECT pid FROM $wpdb->nggpictures WHERE galleryid = '$galleryID' AND exclude != 1 ORDER BY {$ngg->options['galSort']} {$ngg->options['galSortDir']} ");
+		$picarray = array_slice($picarray, $start, 10 );
+	}
 ```
 
 ## Bug Status at NextGEN ##
 As of 8/27/2018 NextGEN has a test version of the plugin which fixes the problem but it has not yet been released.
-
-
-
