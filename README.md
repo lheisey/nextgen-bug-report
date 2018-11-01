@@ -3,8 +3,10 @@
 This is to document a bug in the NextGEN WordPress plugin. The problem occurs when inserting a single picture from NextGEN gallery in post.
 
 ## Bug Description ##
-
 The bug is seen when inserting one NextGEN gallery image in a post when there are more than 10 images in a NextGEN gallery. In this case the pictures are paged and some images are listed on multiple pages and some images are not listed on any of the pages.
+
+## Updated Bug Status at NextGEN ##
+On 10/23/2018 NextGEN released an updated plugin which fixes the problem. Their version of the fix is slightly different than mine (see below).
 
 ## Steps to reproduce bug ##
 Note: The versions are when the bug report was submitted to NextGen. Everything only applies to the free version of the plugin as I do not have access to the paid version to check it.
@@ -48,5 +50,7 @@ For my impletation of a fix I read all of the gallery into an array then select 
 	}
 ```
 
-## Bug Status at NextGEN ##
-As of 8/27/2018 NextGEN has a test version of the plugin which fixes the problem but it has not yet been released.
+## NextGEN's implementation of the bug fix ##
+```
+$picarray = $wpdb->get_col("SELECT DISTINCT pid FROM $wpdb->nggpictures WHERE galleryid = '$galleryID' AND exclude != 1 ORDER BY {$ngg->options['galSort']},`pid` {$ngg->options['galSortDir']} LIMIT $start, 10 ");
+```
